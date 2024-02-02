@@ -37,7 +37,7 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen
               options={{
-                headerShown : false,
+                headerShown: false,
               }}
               name="bottomTabs"
               component={Bottomtabs}
