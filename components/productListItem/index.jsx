@@ -3,9 +3,9 @@ import { Pressable, Text, View, StyleSheet } from "react-native";
 export default function ProductListItem({ title, onPress, bgColor }) {
   return (
     <View style={styles.productItemOuterContainer}>
-      <Pressable onPress={onPress} style={{ ...styles.pressableView, backgroundColor: bgColor }}>
+      <Pressable android_ripple={{color:"#cad346"}} onPress={onPress} style={{ ...styles.pressableView, backgroundColor: bgColor }}>
         <View style={styles.productItemInnerContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{title}</Text>
         </View>
       </Pressable>
     </View>

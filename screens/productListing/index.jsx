@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Context } from "../../context";
 import ProductListItem from "../../components/productListItem";
+import { useNavigation } from "@react-navigation/native";
 
 function createRandomColor() {
   let letters = "0123456789ABCDEF";
@@ -20,16 +21,23 @@ function createRandomColor() {
   return color;
 }
 
-const handleOnPress = () => {}
-
 export default function ProductListing() {
   const { loading, products } = useContext(Context);
+
+  const navigation = useNavigation();
 
   if (loading) {
     return (
       <ActivityIndicator styles={styles.loader} color={"red"} size={"large"} />
     );
   }
+
+  const handleOnPress = (getId) => {
+    navigation.navigate("productDetails", {
+      productId: getId,
+    });
+  };
+
   return (
     <View>
       <FlatList
@@ -38,7 +46,7 @@ export default function ProductListing() {
           <ProductListItem
             title={itemData.item.title}
             bgColor={createRandomColor()}
-            onPress={handleOnPress}
+            onPress={() => handleOnPress(itemData.item.id)}
           />
         )}
         keyExtractor={(itemData) => itemData.id}
