@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useState, useEffect } from "react";
+import ProductDetailsItem from "../../components/productDetailsItem";
 
 export default function ProductDetails() {
   const route = useRoute();
@@ -24,11 +25,13 @@ export default function ProductDetails() {
     getDataFromApi();
   }, []);
 
-  console.log(productDetailsdata);
+  if (loading) {
+    return <ActivityIndicator size="large" color={"red"} />;
+  }
 
   return (
     <View>
-      <Text>ProductDetails</Text>
+      <ProductDetailsItem productDetailsdata={productDetailsdata} />
     </View>
   );
 }
