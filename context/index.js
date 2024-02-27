@@ -22,8 +22,22 @@ const ProductContext = ({ children }) => {
         id: productId,
         reason,
       });
+    } else {
+      cpyFavoriteItems[index] = {
+        ...cpyFavoriteItems[index],
+        reason,
+      };
     }
 
+    setFavoriteItems(cpyFavoriteItems);
+  };
+
+  const handleRemoveFavorites = (getCurrentId) => {
+    let cpyFavoriteItems = [...favoriteItems];
+
+    cpyFavoriteItems = cpyFavoriteItems.filter(
+      (item) => item.id !== getCurrentId
+    );
     setFavoriteItems(cpyFavoriteItems);
   };
 
@@ -41,11 +55,15 @@ const ProductContext = ({ children }) => {
     getProductsFromApi();
   }, []);
 
-  console.log(favoriteItems);
-
   return (
     <Context.Provider
-      value={{ products, loading, addToFavorites, favoriteItems }}
+      value={{
+        products,
+        loading,
+        addToFavorites,
+        handleRemoveFavorites,
+        favoriteItems,
+      }}
     >
       {children}
     </Context.Provider>
